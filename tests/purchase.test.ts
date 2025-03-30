@@ -40,6 +40,7 @@ test("Logged in user can buy multiply products", async ({page}) => {
   await homePage.header.openShop();
   await shopPage.openProductDetailsByName("MARINATED CUCUMBERS NEZHIN");
   await productPage.addToBag();
+  await productPage.minicart.closeCart();
 
   await homePage.header.openShop();
   await shopPage.openProductDetailsByName("CHERRY TOMATOES");

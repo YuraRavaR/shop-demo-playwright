@@ -16,4 +16,7 @@ export class MinicartComponent extends BaseComponent {
   async placeOrder() {
     await this.placeOrderButton.click();
   }
+  async closeCart(){
+    await this.page.getByRole('button', { name: 'close the cart' }).click()
+  }
 }
