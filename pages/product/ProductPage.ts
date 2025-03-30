@@ -1,5 +1,6 @@
 import {expect} from "@playwright/test";
-import {BasePage} from "./BasePage";
+import {BasePage} from "../BasePage";
+import {ReviewComponent} from "./component/ReviewComponent";
 
 export class ProductPage extends BasePage {
   public pagePath = "/product";
@@ -7,7 +8,7 @@ export class ProductPage extends BasePage {
   private addToBagButton = this.page.getByRole("button", {name: "Add To Bag"});
   private removeFromBagButton = this.page.getByRole("button", {name: "Remove From Bag"});
 
-  // public reviewComponent = new Review(this.page);
+  public reviewComponent = new ReviewComponent(this.page);
 
   async expectLoaded(message = "Expected Product page to be opened") {
     await expect(this.addToBagButton.or(this.removeFromBagButton), message).toBeVisible();
