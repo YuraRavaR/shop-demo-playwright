@@ -1,18 +1,19 @@
-import { test, expect } from '@playwright/test';
+import {test, expect} from "@playwright/test";
+import {SignInPage} from "../pages/SignInPage";
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+const data = {
+  email: "test+e1f76f13-0f04-4f2e-86d8-0e78e3df2ddd@test.com",
+  password: "xotabu4@gmail.com",
+};
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+test("Logged in user can buy a product", async ({page}) => {
+  const signInPage = new SignInPage(page);
+  await signInPage.open();
+  await signInPage.signIn(data);
 
-test('get started link', async ({ page }) => {
-  await page.goto('');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await page.getByRole("link", {name: "Shop"}).click();
+  await page.getByRole("link", {name: "MARINATED CUCUMBERS NEZHIN"}).click();
+  await page.getByRole("button", {name: "Add To Bag"}).click();
+  await page.getByRole("button", {name: "Place Order"}).click();
+  await expect(page.getByRole("heading", {name: "Thank you for your order."})).toBeVisible();
 });
