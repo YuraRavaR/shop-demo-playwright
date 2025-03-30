@@ -1,5 +1,10 @@
 import {test, expect} from "@playwright/test";
 import {SignInPage} from "../pages/SignInPage";
+import {HomePage} from "../pages/HomePage";
+import {ShopPage} from "../pages/ShopPage";
+import {ProductPage} from "../pages/ProductPage";
+import {ConfirmationPage} from "../pages/ConfirmationPage";
+// import { ShopPage } from "../pages/ShopPage";
 
 const data = {
   email: "test+e1f76f13-0f04-4f2e-86d8-0e78e3df2ddd@test.com",
@@ -8,12 +13,17 @@ const data = {
 
 test("Logged in user can buy a product", async ({page}) => {
   const signInPage = new SignInPage(page);
+  const homePage = new HomePage(page);
+  const shopPage = new ShopPage(page);
+  const productPage = new ProductPage(page);
+  const confirmationPage = new ConfirmationPage(page);
   await signInPage.open();
   await signInPage.signIn(data);
 
-  await page.getByRole("link", {name: "Shop"}).click();
-  await page.getByRole("link", {name: "MARINATED CUCUMBERS NEZHIN"}).click();
-  await page.getByRole("button", {name: "Add To Bag"}).click();
-  await page.getByRole("button", {name: "Place Order"}).click();
-  await expect(page.getByRole("heading", {name: "Thank you for your order."})).toBeVisible();
+  await homePage.header.openShop();
+  await shopPage.openProductDetailsByName("MARINATED CUCUMBERS NEZHIN");
+  await productPage.addToBag();
+  await productPage.minicart.placeOrder();
+
+  await confirmationPage.expectOrderPlaced();
 });

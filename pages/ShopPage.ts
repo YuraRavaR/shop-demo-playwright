@@ -1,7 +1,7 @@
 import {expect} from "@playwright/test";
 import {BasePage} from "./BasePage";
 
-export class Shop extends BasePage {
+export class ShopPage extends BasePage {
   public pagePath = "/shop";
 
   private productList = this.page.locator(".shop .product-list");
