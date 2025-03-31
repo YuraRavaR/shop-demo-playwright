@@ -9,6 +9,7 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.51.1",
+    "@reportportal/agent-js-playwright": "^5.1.11",
     "@types/node": "^22.13.14"
   }
 }

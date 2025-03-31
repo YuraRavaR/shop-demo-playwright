@@ -1,4 +1,30 @@
-import { defineConfig, devices } from '@playwright/test';
+import {defineConfig, devices} from "@playwright/test";
+
+const RPconfig = {
+  endpoint: "https://demo.reportportal.io/api/v1",
+
+  apiKey: "my-key_T4dyKX-SR6SrWYH3AbUD8cCR9cOgIH5JmebkTCnQdlqo_89Y_DotKWfz9e2nmH3K",
+
+  project: "default_personal",
+
+  launch: "Shop demo",
+
+  description: "My awesome launch",
+
+  attributes: [
+    {
+      key: "attributeKey",
+
+      value: "attrbiuteValue",
+    },
+
+    {
+      value: "anotherAttrbiuteValue",
+    },
+  ],
+
+  mode: "DEFAULT",
+};
 
 /**
  * Read environment variables from file.
@@ -12,7 +38,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -22,36 +48,37 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  captureGitInfo: {diff:true, commit:true},
+  reporter: [["@reportportal/agent-js-playwright", RPconfig], ["html"]],
+  captureGitInfo: {diff: true, commit: true},
 
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://shopdemo-alex-hot.koyeb.app/',
+    baseURL: "https://shopdemo-alex-hot.koyeb.app/",
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: "on-first-retry",
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] ,
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chrome"],
         //  viewport: { width: 1580, height: 900 }
-        },
+      },
     },
 
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
 
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+    },
 
     /* Test against mobile viewports. */
     // {

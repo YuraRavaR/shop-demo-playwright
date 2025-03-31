@@ -10,7 +10,7 @@ const data = {
   password: "xotabu4@gmail.com",
 };
 
-test("Logged in user can buy a product", async ({page}) => {
+test("Logged in user can buy a product @smoke", async ({page}) => {
   const signInPage = new SignInPage(page);
   const homePage = new HomePage(page);
   const shopPage = new ShopPage(page);
@@ -28,7 +28,7 @@ test("Logged in user can buy a product", async ({page}) => {
   await confirmationPage.expectOrderPlaced();
 });
 
-test("Logged in user can buy multiply products", async ({page}) => {
+test("Logged in user can buy multiply products @smoke", async ({page}) => {
   const signInPage = new SignInPage(page);
   const homePage = new HomePage(page);
   const shopPage = new ShopPage(page);

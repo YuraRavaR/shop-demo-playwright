@@ -10,7 +10,7 @@ const data = {
   password: "xotabu4@gmail.com",
 };
 
-test("Logged in user can post review for product", async ({page}) => {
+test("Logged in user can post review for product @regression", async ({page}) => {
   const signInPage = new SignInPage(page);
   const homePage = new HomePage(page);
   const shopPage = new ShopPage(page);
