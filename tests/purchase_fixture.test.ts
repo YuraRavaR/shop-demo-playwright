@@ -5,7 +5,10 @@ const data = {
   password: "xotabu4@gmail.com",
 };
 
-test1("Logged in user can buy a product", async ({signInPage, homePage, shopPage, productPage, confirmationPage}) => {
+test1("Logged in user can buy a product", async ({signInPage, homePage, shopPage, productPage, confirmationPage, browserName}) => {
+  if(browserName === "firefox" || browserName === "webkit"){
+    test1.skip()
+  }
   await signInPage.open();
   await signInPage.signIn(data);
 

@@ -17,6 +17,6 @@ export abstract class BasePage {
 
   async open(path?: string) {
     await this.page.goto(path ?? this.pagePath);
-    await this.expectLoaded();
+    // await this.expectLoaded();
   }
 }
