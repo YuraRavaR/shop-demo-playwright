@@ -50,3 +50,18 @@ test("Logged in user can buy multiply products @smoke", async ({page}) => {
 
   await confirmationPage.expectOrderPlaced();
 });
+
+test("Logged in user can buy multiply products - failed test @smoke", async ({page}) => {
+  const signInPage = new SignInPage(page);
+  const homePage = new HomePage(page);
+  const shopPage = new ShopPage(page);
+  const productPage = new ProductPage(page);
+  const confirmationPage = new ConfirmationPage(page);
+  await signInPage.open();
+  await signInPage.signIn(data);
+
+  await homePage.header.openShop();
+  await shopPage.openProductDetailsByName("MARINATED CUCUMBERS NEZHIN");
+
+  await confirmationPage.expectOrderPlaced();
+});
